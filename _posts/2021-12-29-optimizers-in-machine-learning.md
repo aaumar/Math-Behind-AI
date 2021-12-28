@@ -45,10 +45,44 @@ Choosing a learning rate is very crucial as it will affect the training process.
 1. $$\eta$$ too small: the model will take a long time to learn.
 2. $$\eta$$ too large: the model will not converge to the minima.
 
-check7
+<img src="https://aaumar.github.io/Math-Behind-AI/assets/images/learning_rate.jpg"/>
 
-![Gambar](https://github.com/aaumar/Math-Behind-AI/blob/gh-pages/assets/images/learning_rate.jpg)
+Gradient descent does come with some drawbacks:
 
-<img src="https://github.com/aaumar/Math-Behind-AI/blob/gh-pages/assets/images/learning_rate.jpg"/>
+- Might converges to local minima: In real-life, there are a lot of cases when the data have multiple minima.
+- Takes a longer training time when dealing with very large data: As gradient descent calculates the gradients for the whole dataset to perform just one update.
+
+→ As classical gradient descent updates the parameter after evaluating the whole dataset, usually it is called as **batch gradient descent** as it processes the whole **batch** of data.
+
+## Stochastic Gradient Descent
+
+Stochastic gradient descent, as described from its name, introduce randomness into the learning process. While GD computes the whole dataset to update weights, SGD only takes one random point from the data and calculates the gradient from that data. In SGD, the weight $w$ is updated as
+
+$$w_{k+1}=w_k-\eta\nabla_w\left[\left(\hat y(x_n,w)-t_n\right)^2\right]$$
+
+where $n$ is chosen uniformly at random.
+
+This modification leads to:
+
+1. Enabling the learning process to be faster compared to batch gradient descent.
+2. A slow convergence rate on a strongly convex function.
+3. Having a better generalization rule to work with new data outside the training dataset.
+4. Getting out from the local minima as a result of only evaluating the gradient of cost function from one data.
+
+## Mini-batch Gradient Descent
+
+To balance the advantages of batch gradient descent and stochastic gradient descent, mini-batch gradient descent comes with an idea to update the weights for every mini-batch of $m$ training examples where $$1< m < N $$.
+
+$$w_{k+1}=w_k-\eta\dfrac{1}{2m}\sum_{n=1}^{m}\nabla_w\left[\left(\hat y(x_n,w)-t_n\right)^2\right]$$
+
+The number of batches can be chosen freely, but keep in mind that a smaller batch size leads to better generalization. 
 
 <img src="https://aaumar.github.io/Math-Behind-AI/assets/images/GD-type.png">
+
+The illustration above shows the cost evolution of each gradient descent type. We can see that batch gradient descent updates the weights to their optimal very smoothly.
+
+[](https://arxiv.org/pdf/1609.04836.pdf)
+
+---
+
+SGD takes a lot of attention in the literature for its ability to learn quickly. There are a lot of modifications to improve the learning rate based on SGD formulation. Here, we will learn some algorithms that are widely used in deep learning applications.
