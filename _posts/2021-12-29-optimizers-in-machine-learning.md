@@ -24,7 +24,7 @@ $$\hat y(x,w) = wx$$
 
 where $w$ will be trained to minimize the difference between the network output $\hat y$ and its target $t_n$ corresponding to the observation data $x$.
 
-Let us define the cost function as follow**.**
+Let us define the cost function as follow.
 
 $$J(w)=\dfrac{1}{2N}\sum_{n=1}^{N}\left[\left(t_n-\hat y(x_n,w)\right)^2\right]$$
 
