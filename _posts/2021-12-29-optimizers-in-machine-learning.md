@@ -45,4 +45,4 @@ Choosing a learning rate is very crucial as it will affect the training process.
 1. $$\eta$$ too small: the model will take a long time to learn.
 2. $$\eta$$ too large: the model will not converge to the minima.
 
-<img src="/assets/images/learning_rate.jpg">
+<img src="../assets/images/learning_rate.jpg">
