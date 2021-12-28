@@ -47,6 +47,6 @@ Choosing a learning rate is very crucial as it will affect the training process.
 
 check2
 
-<img src="../assets/images/learning_rate.jpg">
+<img src="../assets/images/learning_rate.JPG">
 
-<img src="../assets/images/GD-type.png">
+<img src="../assets/images/GD-type.PNG">
