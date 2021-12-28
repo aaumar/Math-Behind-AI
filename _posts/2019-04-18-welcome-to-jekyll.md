@@ -1,6 +1,6 @@
 ---
-title: "Welcome to Jekyll!"
-date: 2019-04-18T15:34:30-04:00
+title: "Optimizers in Machine Learning"
+date: 2021-12-28T15:34:30+09:00
 categories:
   - blog
 tags:
@@ -16,7 +16,7 @@ As machine learning develops rapidly, many optimizers have shown their performan
 
 Gradient descent is an iterative optimization algorithm used in training a model. It minimizes the loss function $J(w)$ parameterized by the model's parameters $w$.
 
-Suppose that we are given a training data set that consists of $N$ observations $\{\bold x_n\}$ and corresponding target values $\{\bold y_n\}$ where $n=1,\dots, N$. The goal of training a network is to achieve the performance when the network can predict the value ${\hat y}$ from any new value of $x$. 
+Suppose that we are given a training data set that consists of $N$ observations $\{\bold x_n\}$ and corresponding target values {$\{\bold y_n\}$} where $n=1,\dots, N$. The goal of training a network is to achieve the performance when the network can predict the value ${\hat y}$ from any new value of $x$. 
 
 Let us consider a simple linear function that describes the value ${\hat y}$ 
 
