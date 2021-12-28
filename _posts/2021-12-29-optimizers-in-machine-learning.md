@@ -45,8 +45,8 @@ Choosing a learning rate is very crucial as it will affect the training process.
 1. $$\eta$$ too small: the model will take a long time to learn.
 2. $$\eta$$ too large: the model will not converge to the minima.
 
-check3
+check4
 
 <img src="https://github.com/aaumar/Math-Behind-AI/blob/gh-pages/assets/images/learning_rate.jpg">
 
-<img src="../assets/images/GD-type.PNG">
+<img src="/blob/gh-pages/assets/images/GD-type.png">
