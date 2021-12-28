@@ -14,7 +14,7 @@ As machine learning develops rapidly, many optimizers have shown their performan
 
 ## Gradient Descent (GD)
 
-Gradient descent is an iterative optimization algorithm used in training a model. It minimizes the loss function $J(w)$ parameterized by the model's parameters $w$.
+Gradient descent is an iterative optimization algorithm used in training a model. It minimizes the loss function /$$J(w)$$ parameterized by the model's parameters $w$.
 
 Suppose that we are given a training data set that consists of $N$ observations $\{\bold x_n\}$ and corresponding target values {$\{\bold y_n\}$} where $n=1,\dots, N$. The goal of training a network is to achieve the performance when the network can predict the value ${\hat y}$ from any new value of $x$. 
 
