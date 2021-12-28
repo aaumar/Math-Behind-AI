@@ -56,11 +56,11 @@ Gradient descent does come with some drawbacks:
 
 ## Stochastic Gradient Descent
 
-Stochastic gradient descent, as described from its name, introduce randomness into the learning process. While GD computes the whole dataset to update weights, SGD only takes one random point from the data and calculates the gradient from that data. In SGD, the weight $w$ is updated as
+Stochastic gradient descent, as described from its name, introduce randomness into the learning process. While GD computes the whole dataset to update weights, SGD only takes one random point from the data and calculates the gradient from that data. In SGD, the weight $$w$$ is updated as
 
 $$w_{k+1}=w_k-\eta\nabla_w\left[\left(\hat y(x_n,w)-t_n\right)^2\right]$$
 
-where $n$ is chosen uniformly at random.
+where $$n$$ is chosen uniformly at random.
 
 This modification leads to:
 
@@ -71,7 +71,7 @@ This modification leads to:
 
 ## Mini-batch Gradient Descent
 
-To balance the advantages of batch gradient descent and stochastic gradient descent, mini-batch gradient descent comes with an idea to update the weights for every mini-batch of $m$ training examples where $$1< m < N $$.
+To balance the advantages of batch gradient descent and stochastic gradient descent, mini-batch gradient descent comes with an idea to update the weights for every mini-batch of $$m$$ training examples where $$1< m < N $$.
 
 $$w_{k+1}=w_k-\eta\dfrac{1}{2m}\sum_{n=1}^{m}\nabla_w\left[\left(\hat y(x_n,w)-t_n\right)^2\right]$$
 
