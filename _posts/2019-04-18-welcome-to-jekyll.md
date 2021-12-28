@@ -8,22 +8,8 @@ tags:
   - update
 ---
 
-You'll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+At the beginning of the machine learning era, people tend to use classical gradient descent (GD) to train the model they want to use. However, gradient descent performance will suffer if the data becomes very large. This limitation motivates people to find a better optimizers formulation so the network can train fast in any available data condition. Besides the speed of training, generalization in machine learning is also crucial as predicting the output from new data, which is not part of the training set, is the goal of the training process.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+As machine learning develops rapidly, many optimizers have shown their performance in making the training phase faster. Here, we are going to look at some popular optimizers used in applications.
 
-Jekyll also offers powerful support for code snippets:
-
-```ruby
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-```
-
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+## Gradient Descent (GD)
