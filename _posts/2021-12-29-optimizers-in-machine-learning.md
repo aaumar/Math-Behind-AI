@@ -47,7 +47,7 @@ Choosing a learning rate is very crucial as it will affect the training process.
 
 check7
 
-![Gambar](https://aumar.github.io/assets/images/learning_rate.jpg)
+![Gambar](https://github.com/aaumar/Math-Behind-AI/blob/gh-pages/assets/images/learning_rate.jpg)
 
 <img src="https://github.com/aaumar/Math-Behind-AI/blob/gh-pages/assets/images/learning_rate.jpg"/>
 
