@@ -47,4 +47,4 @@ Choosing a learning rate is very crucial as it will affect the training process.
 
 check
 
-![image](/assets/images/learning_rate.jpg)
+<img src="/assets/images/learning_rate.jpg" alt="">
