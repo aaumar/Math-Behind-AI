@@ -51,4 +51,4 @@ check7
 
 <img src="https://github.com/aaumar/Math-Behind-AI/blob/gh-pages/assets/images/learning_rate.jpg"/>
 
-<img src="Math-Behind-AI/assets/images/GD-type.png">
+<img src="https://aaumar.github.io/Math-Behind-AI/assets/images/GD-type.png">
