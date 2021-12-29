@@ -95,11 +95,11 @@ Momentum does this by adding a fraction $$\gamma$$ of the update vector of the p
 
 $$\begin{aligned}v_t&=\gamma v_{t-1}+\eta\nabla_w J(w) \\ w_{k+1}&=w_k - v_t\end{aligned}$$
 
-The momentum term $\gamma$ is bounded to $$0<\gamma<1$$, but is usually set to $$0.9$$. The momentum term increases whose gradients point in the same directions and reduces updates whose gradients change directions. As a result, the momentum helps faster convergence and reduces the oscillation.
+The momentum term $$\gamma$$ is bounded to $$0<\gamma<1$$, but is usually set to $$0.9$$. The momentum term increases whose gradients point in the same directions and reduces updates whose gradients change directions. As a result, the momentum helps faster convergence and reduces the oscillation.
 
 # Adagrad
 
-Instead of using a fixed learning rate as we already saw earlier, adagrad comes with an idea to use an adaptive learning rate so it can learn fast and slow the learning process to prevent the weights from oscillating. Adagrad uses a different for every weight $w_i$ at every time step $k$. We denote $g_{k,i}$ as the gradient of the cost function w.r.t. the weight $$w_i$$ at time $$k$$:
+Instead of using a fixed learning rate as we already saw earlier, adagrad comes with an idea to use an adaptive learning rate so it can learn fast and slow the learning process to prevent the weights from oscillating. Adagrad uses a different for every weight $$w_i$$ at every time step $$k$$. We denote $$g_{k,i}$$ as the gradient of the cost function w.r.t. the weight $$w_i$$ at time $$k$$:
 
 $$g_{k,i}=\nabla_{w_k} J(w_{k,i})$$
 
@@ -119,3 +119,50 @@ Even though Adagrad automatically tunes the learning rate, the accumulation of s
 
 # Adadelta
 
+Instead of accumulating all past squared gradients, as in Adagrad, Adadelta uses some fixed size windows $$j$$ to accumulate pas gradients. To remove the necessity of storing the $$j$$ previous squared gradients, the sum of all gradients is recursively defined as a decaying average of the squared gradients. Assume at time $$k-1$$ this running average is $$E[g^2]_{k-1}$$, then we compute:
+
+$$E[g^2]_k = \gamma E[g^2]_k+(1-\gamma)g_k^2$$
+
+where $$\gamma$$ is a decay constant similar to that used in the momentum method, around $$0.9$$. The weight update rule in Adadelta simply changes $$G_k$$ in Adagrad to $$E[g^2]_k$$.
+
+$$\Delta w_k=-\dfrac{\eta}{\sqrt{E[g^2]_{k}+\epsilon}}\cdot g_{k}$$
+
+$$\Delta w_k=-\dfrac{\eta}{RMS[g]_k}\cdot g_{k}$$
+
+$$w_{k+1}=w_{k}+\Delta w_k$$
+
+The formulation above is well known as **Adadelta: Idea 1.** In the literature, Adadelta: Idea 1 is also very similar to an optimizer method called **RMSprop**, an unpublished optimizer by Geoff Hinton, as the development of these optimizers are conducted at the same time and the authors are unaware of this.
+
+In the same paper, the author of Adadelta realizes there is a mismatch in units of Adadelta: Idea 1. They introduce another exponentially decaying average, the squared of parameter updates
+
+$$E[\Delta w^2]_k = \gamma E[\Delta w^2]_k+(1-\gamma)\Delta w_k^2$$
+
+The root mean squared error of parameter updates is:
+
+$$RMS[\Delta w]_k=\sqrt{E[\Delta w^2]_k+\epsilon}$$
+
+Replacing the learning rate $$\eta$$ in the previous update rule with $$RMS[\Delta w]_{k-1}$$ yields to the **Adadelta: Idea 2** update rule:
+
+$$\Delta w_k=-\dfrac{RMS[\Delta w]_k}{RMS[g]_k}\cdot g_{k}$$
+
+$$w_{k+1}=w_{k}+\Delta w_k$$
+
+With this formulation, the requirement to set a learning rate has been fully eliminated.
+
+# Adam
+
+Adam is a method for efficient stochastic optimization that only requires first-order gradients with little memory requirement. Adam updates exponential moving averages of the gradient $$(m_k)$$ and the squared gradient $$(v_k)$$ where the hyper-parameters $$\beta_1, \beta_2 \in [0,1)$$ control the exponential decay rates of these moving averages.
+
+$$\begin{aligned}m_{k} &=\beta_{1} m_{k-1}+\left(1-\beta_{1}\right) g_{k} \\v_{k} &=\beta_{2} v_{k-1}+\left(1-\beta_{2}\right) g_{k}^{2}\end{aligned}$$
+
+where $$m_k$$ and $$v_k$$ are estimates of the first moment (the mean) and the second moment (the uncentered variance) of the gradients, respectively. As $$m_k$$ and $$v_k$$ are initialized as vectors of 0's. the authors of Adam observe that they are biased towards zero, especially during initial time steps, and especially when the decay rates are small (i.e. $$\beta$$s are close to 1).
+
+They counteract these biases by computing bias-corrected first and second moment estimates:
+
+$$\begin{aligned}\hat{m}_{k} &=\frac{m_{k}}{1-\beta_{1}^{k}} \\\hat{v}_{k} &=\frac{v_{k}}{1-\beta_{2}^{k}}\end{aligned}$$
+
+Then, the Adam update rule is
+
+$$w_{k+1}=w_{k}-\dfrac{\eta}{\sqrt{\hat v_{k}+\epsilon}}\cdot \hat m_{k}$$
+
+The author proposed a default value for $$\eta=0.001$$, $$\beta_1=0.9$$, $$\beta_2=0.999$$, and $$\epsilon=10^{-8}$$. All operations on vectors are element-wise.
