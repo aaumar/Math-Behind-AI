@@ -81,8 +81,18 @@ The number of batches can be chosen freely, but keep in mind that a smaller batc
 
 The illustration above shows the cost evolution of each gradient descent type. We can see that batch gradient descent updates the weights to their optimal very smoothly.
 
-[](https://arxiv.org/pdf/1609.04836.pdf)
-
 ---
 
 SGD takes a lot of attention in the literature for its ability to learn quickly. There are a lot of modifications to improve the learning rate based on SGD formulation. Here, we will learn some algorithms that are widely used in deep learning applications.
+
+# Momentum
+
+Momentum is a method that helps accelerate SGD in the relevant direction and dampens the oscillation of updating the weights into the optimal value.
+
+<img src="https://aaumar.github.io/Math-Behind-AI/assets/images/momentum.png">
+
+Momentum does this by adding a fraction $$\gamma$$ of the update vector of the past time step to the current update vector
+
+$$\begin{aligned}v_t&=\gamma v_{t-1}+\eta\nabla_w J(w) \\ w_{k+1}&=w_k - v_t\end{aligned}$$
+
+The momentum term $\gamma$ is bounded to $$0<\gamma<1$$, but is usually set to $$0.9$$. The momentum term increases whose gradients point in the same directions and reduces updates whose gradients change directions. As a result, the momentum helps faster convergence and reduces the oscillation.
