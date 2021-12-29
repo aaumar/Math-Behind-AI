@@ -97,9 +97,11 @@ a_3^{(1)}&=\sum_{i=0}^2 w_{i,3}^{(1)}x_i=\mathbf w_3^{(1)^T}\mathbf x
 
 $$\{z_j\}$$: neuron of hidden layer, with $$j=\{1,2,3\}$$ and $$z_0=1$$. Let us assume the activation function is a hyperbolic tangent.
 
-$$z_1=h(a_1^{(1)})=\dfrac{e^{a_1^{(1)}}-e^{-a_1^{(1)}}}{e^{a_1^{(1)}}+e^{-a_1^{(1)}}} \\
-z_1=h(a_2^{(1)})=\dfrac{e^{a_2^{(1)}}-e^{-a_2^{(1)}}}{e^{a_2^{(1)}}+e^{-a_2^{(1)}}} \\
-z_3=h(a_3^{(1)})=\dfrac{e^{a_3^{(1)}}-e^{-a_3^{(1)}}}{e^{a_3^{(1)}}+e^{-a_3^{(1)}}}$$
+$$\begin{aligned}
+z_1&=h(a_1^{(1)})=\dfrac{e^{a_1^{(1)}}-e^{-a_1^{(1)}}}{e^{a_1^{(1)}}+e^{-a_1^{(1)}}} \\
+z_1&=h(a_2^{(1)})=\dfrac{e^{a_2^{(1)}}-e^{-a_2^{(1)}}}{e^{a_2^{(1)}}+e^{-a_2^{(1)}}} \\
+z_3&=h(a_3^{(1)})=\dfrac{e^{a_3^{(1)}}-e^{-a_3^{(1)}}}{e^{a_3^{(1)}}+e^{-a_3^{(1)}}}
+\end{aligned}$$
 
 $$w^{(2)}$$: weight matrix connecting hidden and output layer
 
@@ -122,15 +124,18 @@ The activation unit of the output depends on the problem.
 1. If the problem is classification, use the SoftMax function.
 2. If the problem is regression, use the linear function.
 
-As we already learned from [Optimizers in Neural Network](https://aaumar.github.io/Math-Behind-AI/mathematics/optimizers-in-machine-learning/), gradient descent updates the weight using the gradient of error function w.r.t. the weight. In this case, we want to update $$W^{(1)}$$ and $$W^{(2)}$$. Let us calculate the gradient of error function $$\nabla_\mathbf wE_n(\mathbf w)$$ w.r.t. $$W^{(1)}$$ and $$W^{(2)}$$ by assuming the activation function in the output layer is linear. We have to apply the chain rule in order to derive the cost function as follows.
+As we already learned from [Optimizers in Machine Learning](https://aaumar.github.io/Math-Behind-AI/mathematics/optimizers-in-machine-learning/), gradient descent updates the weight using the gradient of error function w.r.t. the weight. In this case, we want to update $$W^{(1)}$$ and $$W^{(2)}$$. Let us calculate the gradient of error function $$\nabla_\mathbf wE_n(\mathbf w)$$ w.r.t. $$W^{(1)}$$ and $$W^{(2)}$$ by assuming the activation function in the output layer is linear. We have to apply the chain rule in order to derive the cost function as follows.
 
-$$\nabla_\mathbf wE_n(\mathbf w)=\begin{bmatrix}
+$$\begin{aligned}
+\nabla_\mathbf wE_n(\mathbf w)&=\begin{bmatrix}
 \dfrac{\partial E_n(\mathbf w)}{\partial w_{i,j}^{(1)}}\\ \\
 \dfrac{\partial E_n(\mathbf w)}{\partial w_{j,k}^{(2)}}
-\end{bmatrix}= \begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 \dfrac{\partial E_n(\mathbf w)}{\partial y} \cdot \dfrac{\partial y}{\partial a^{(2)}}\cdot \dfrac{\partial a^{(2)}}{\partial z_j}\cdot \dfrac{\partial z_j}{\partial a_j^{(1)}}\cdot \dfrac{\partial a_j^{(1)}}{\partial w_{i,j}^{(1)}}\\ \\
 \dfrac{\partial E_n(\mathbf w)}{\partial y_k}\cdot\dfrac{\partial y_k}{\partial a_k^{(2)}}\cdot\dfrac{\partial a_k^{(2)}}{\partial w_{j,k}^{(2)}}
-\end{bmatrix}$$
+\end{bmatrix}
+\end{aligned}$$
 
 We will deal with the easy one first, the gradient of error function w.r.t. $$w^{(2)}$$, to get the intuition of the backpropagation algorithm.
 
