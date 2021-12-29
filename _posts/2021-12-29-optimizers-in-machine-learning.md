@@ -96,3 +96,26 @@ Momentum does this by adding a fraction $$\gamma$$ of the update vector of the p
 $$\begin{aligned}v_t&=\gamma v_{t-1}+\eta\nabla_w J(w) \\ w_{k+1}&=w_k - v_t\end{aligned}$$
 
 The momentum term $\gamma$ is bounded to $$0<\gamma<1$$, but is usually set to $$0.9$$. The momentum term increases whose gradients point in the same directions and reduces updates whose gradients change directions. As a result, the momentum helps faster convergence and reduces the oscillation.
+
+# Adagrad
+
+Instead of using a fixed learning rate as we already saw earlier, adagrad comes with an idea to use an adaptive learning rate so it can learn fast and slow the learning process to prevent the weights from oscillating. Adagrad uses a different for every weight $w_i$ at every time step $k$. We denote $g_{k,i}$ as the gradient of the cost function w.r.t. the weight $$w_i$$ at time $$k$$:
+
+$$g_{k,i}=\nabla_{w_k} J(w_{k,i})$$
+
+Adagrad computes the successor weight $$w_{k+1,i}$$ by modifying the learning rate $$\eta$$ at each time step $$k$$ for every weight $$w_i$$ based on the past gradients that have been computed for $$w_i$$.
+
+$$\begin{aligned}G_{k,ii}&=\sum_{j=1}^kg_{j,i}^2 \\
+w_{k+1,i}&=w_{k,i}-\dfrac{\eta}{\sqrt{G_{k,ii}+\epsilon}}\cdot g_{k,i}
+\end{aligned}$$
+
+or
+
+$$w_{k+1}=w_{k}-\dfrac{\eta}{\sqrt{G_{k}+\epsilon}}\cdot g_{k}$$
+
+$$G_k$$ is a diagonal matrix where each diagonal element $$i,i$$ is the sum of the squares of the gradients w.r.t. $$w_i$$ up to time step $$k$$, whereas $$\epsilon$$ is to avoid division by zero (define $$\epsilon$$ as a very small number, usually $$10^{-8}$$). 
+
+Even though Adagrad automatically tunes the learning rate, the accumulation of squared gradients in the denominator causes the learning rate to shrink and could prevent the model to learn at some point because the learning rate is too small. This drawback drives the development of the next optimizers.
+
+# Adadelta
+
