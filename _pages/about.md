@@ -1,8 +1,13 @@
 ---
 permalink: /about/
 title: "About"
+author_profile: true
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+Welcome to [Mathematics Behind AI](https://aaumar.github.io/Math-Behind-AI/). 
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+This website aims to share the mathematical background of artificial intelligence. We provide substantial material to grasp the mathematical aspects of several popular algorithms that are mainly used in real-life nowadays. 
+
+Currently, we are focused on sharing the mathematics of supervised learning algorithms. Starting from understanding the optimizers available from established platforms like [TensorFlow](https://www.tensorflow.org/) such as Gradient Descent and its advanced technique. 
+
+We introduce the structure of artificial neural networks and the backpropagation algorithm to train the network. In addition, recurrent neural network (RNN), which is known as a good approximation method for a dynamical system, is also presented on this website together with Long-Short Term Memory (LSTM) as a solution to vanishing gradient in RNN.
