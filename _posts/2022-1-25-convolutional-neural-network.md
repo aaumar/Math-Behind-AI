@@ -1,5 +1,5 @@
 ---
-title: "Convolution Neural Network"
+title: "Convolutional Neural Network"
 date: 2022-01-25T15:37:30+09:00
 categories:
   - Mathematics
@@ -26,7 +26,7 @@ To obtain the full knowledge of CNNs, let us focus on each layer and the trainin
 
 ### Convolution process
 
-Let us assume that the input of our neural network is an image such as a color image of a CIFAR-10 dataset with a width and height of $32\times32$ pixels, and a depth of 3 which RGB channel. To connect the input layer to only one neuron in a fully-connected layer, there should be $32\times32\times3$ weight connections for the CIFAR-10 dataset. Therefore, instead of a full connection, it is a good idea to look for local regions in the picture instead of in the whole image.  The figure below shows a regional connection for the next layer. 
+Let us assume that the input of our neural network is an image such as a color image of a CIFAR-10 dataset with a width and height of $$32\times32$$ pixels, and a depth of 3 which RGB channel. To connect the input layer to only one neuron in a fully-connected layer, there should be $$32\times32\times3$$ weight connections for the CIFAR-10 dataset. Therefore, instead of a full connection, it is a good idea to look for local regions in the picture instead of in the whole image.  The figure below shows a regional connection for the next layer. 
 
 <img src="https://aaumar.github.io/Math-Behind-AI/assets/images/convolution.png"/>
 
@@ -49,15 +49,15 @@ The output of the convolution process will be activated using rectified linear u
 
 ### Stride
 
-In the previous convolution process, we move the filter through the input one step each time to calculate the output (which is the limit of $3\times3$ input shape). To see clearly the effect of stride, let us assume that our input is a $7\times7$ image. If we move the filter one step each time, it will leave us a$5\times5$ output. But, if we move the filter two steps each time, which is called $2$ stride size, it yields an output with a dimension of $3\times3$. The effect of using stride more than one will decrease the parameters more in a convolutional layer.
+In the previous convolution process, we move the filter through the input one step each time to calculate the output (which is the limit of $$3\times3$$ input shape). To see clearly the effect of stride, let us assume that our input is a $$7\times7$$ image. If we move the filter one step each time, it will leave us a$$5\times5$$ output. But, if we move the filter two steps each time, which is called $$2$$ stride size, it yields an output with a dimension of $$3\times3$$. The effect of using stride more than one will decrease the parameters more in a convolutional layer.
 
-To calculate the output size of a convolutional layer, let us assume given the image $N\times N$ dimension and the filter size of the $F\times F$, the output size $O$ is given as
+To calculate the output size of a convolutional layer, let us assume given the image $$N\times N$$ dimension and the filter size of the $$F\times F$$, the output size $$O$$ is given as
 
 $$
 O=1+\frac{N-F}{S}
 $$
 
-where $S$ is the stride size.
+where $$S$$ is the stride size.
 
 ###  Padding
 
@@ -75,12 +75,11 @@ where P is the number of the zero-padding (e.g. P=1 in the above figure). This p
 
 ## Pooling Layer
 
-The main idea of pooling is down-sampling in order to reduce the complexity for further layers.  This layer operates over each activation mapping of the input and scales its dimensionality using the “MAX” function which is usually called max-pooling layers. It divides the image to sub-region rectangles and returns only the maximum value of the value inside that sub-region. One of the most common sizes used in max-pooling is $2\times2$.
+The main idea of pooling is down-sampling in order to reduce the complexity for further layers.  This layer operates over each activation mapping of the input and scales its dimensionality using the “MAX” function which is usually called max-pooling layers. It divides the image to sub-region rectangles and returns only the maximum value of the value inside that sub-region. One of the most common sizes used in max-pooling is $$2\times2$$.
 
 <img src="https://aaumar.github.io/Math-Behind-AI/assets/images/pooling.png"/>
 
-In the figure above, the input is divided into sub-regions with each sub-region having a dimension of $2\times2$. It means that stride 2 is used in the pooling process which will down-sampling the image and we might lose the position information of an object in the image. Therefore, pooling should be applied only when the presence of information is more important than spatial information.
-
+In the figure above, the input is divided into sub-regions with each sub-region having a dimension of $$2\times2$$. It means that stride 2 is used in the pooling process which will down-sampling the image and we might lose the position information of an object in the image. Therefore, pooling should be applied only when the presence of information is more important than spatial information.
 
 ## Fully-Connected (FC) Layer
 
@@ -92,7 +91,7 @@ The training process is comprised of two parts: forward pass and backward pass. 
 
 ### Forward Pass
 
-Forward pass in the convolutional layer is a convolution operation between an input $X$ and a filter $F$. This process is actually the convolutional process as we already discussed earlier in this note. We will focus on using the same dimension as stated in the convolutional process for this section and yield the below output value.
+Forward pass in the convolutional layer is a convolution operation between an input $$X$$ and a filter $$F$$. This process is actually the convolutional process as we already discussed earlier in this note. We will focus on using the same dimension as stated in the convolutional process for this section and yield the below output value.
 
 <img src="https://aaumar.github.io/Math-Behind-AI/assets/images/convolution-2.png"/>
 
@@ -109,26 +108,26 @@ $$
 
 <img src="https://aaumar.github.io/Math-Behind-AI/assets/images/convolution-3.png"/>
 
-In the backward pass, we want to calculate the gradient of the loss w.r.t. the filter $F$. In this note, we assume that the gradient of the loss from the previous layer is known as $\partial L/\partial O$.  We want to calculate $\partial L/\partial F$ and $\partial L/\partial X$ in the backward pass. These can be calculated using the chain rule as can be seen in the figure above.
+In the backward pass, we want to calculate the gradient of the loss w.r.t. the filter $$F$$. In this note, we assume that the gradient of the loss from the previous layer is known as $$\partial L/\partial O$$.  We want to calculate $$\partial L/\partial F$$ and $$\partial L/\partial X$$ in the backward pass. These can be calculated using the chain rule as can be seen in the figure above.
 
-But the question is, why do we need to find $\partial L/\partial F$ and $\partial L/\partial X$? The first term,  $\partial L/\partial F$, is used to update the filter using gradient descent as below
+But the question is, why do we need to find $$\partial L/\partial F$$ and $$\partial L/\partial X$$? The first term,  $$\partial L/\partial F$$, is used to update the filter using gradient descent as below
 
 $$
 F_\text{new} = F_\text{current}-\alpha\cdot\frac{\partial L}{\partial F}
 $$
 
-Since $X$ is the output of the previous layer, $\partial L/\partial X$ becomes the gradient for the previous layer.
+Since $$X$$ is the output of the previous layer, $$\partial L/\partial X$$ becomes the gradient for the previous layer.
 
-## Calculation of $\partial L/\partial F$ and $\partial L/\partial X$
+## Calculation of $$\partial L/\partial F$$ and $$\partial L/\partial X$$
 
-### Finding $\partial L/\partial F$
+### Finding $$\partial L/\partial F$$
 
 To find this, we need to perform:
 
-- Find the local gradient $\partial O/\partial F$
-- Find $\partial L/\partial F$ using the chain rule
+- Find the local gradient $$\partial O/\partial F$$
+- Find $$\partial L/\partial F$$ using the chain rule
 
-*Step 1: Finding the local gradient ($\partial O/\partial F$)*
+*Step 1: Finding the local gradient ($$\partial O/\partial F$$)*
 
 From our convolution operation, we know that
 
@@ -136,17 +135,17 @@ $$
 O_{11}=X_{11}F_{11}+X_{12}F_{12}+X_{21}F_{21}+X_{22}F_{22}
 $$
 
-We can find the gradient of $O_{11}$ with respect to the elements of $F$ $(F_{11}, F_{12}, F_{21}, F_{22})$ as
+We can find the gradient of $$O_{11}$$ with respect to the elements of $$F$$ $$(F_{11}, F_{12}, F_{21}, F_{22})$$ as
 
 $$
 \frac{\partial O_{11}}{\partial {F}_{11}}={X}_{11,} \quad \frac{\partial O_{11}}{\partial {F}_{12}}={X}_{12}, \quad \frac{\partial O_{11}}{\partial {F}_{21}}={X}_{21}, \quad \frac{\partial O_{11}}{\partial {F}_{22}}={X}_{22}
 $$
 
-Similarly, we can find the local gradients for $O_{12}, O_{21},$  and $O_{22}$.
+Similarly, we can find the local gradients for $$O_{12}, O_{21},$$  and $$O_{22}$$.
 
 *Step 2: Using the chain rule*
 
-We need to find $\partial L/\partial F$ as
+We need to find $$\partial L/\partial F$$ as
 
 $$
 \frac{\partial L}{\partial F}=\frac{\partial L}{\partial O} * \frac{\partial O}{\partial F}
@@ -170,11 +169,11 @@ $$
 \begin{aligned}&\frac{\partial L}{\partial F_{11}}=\frac{\partial L}{\partial O_{11}} * X_{11}+\frac{\partial L}{\partial O_{12}} * X_{12}+\frac{\partial L}{\partial O_{21}} * X_{21}+\frac{\partial L}{\partial O_{22}} * X_{22} \\ \quad \\&\frac{\partial L}{\partial F_{12}}=\frac{\partial L}{\partial O_{11}} * X_{12}+\frac{\partial L}{\partial O_{12}} * X_{13}+\frac{\partial L}{\partial O_{21}} * X_{22}+\frac{\partial L}{\partial O_{22}} * X_{23} \\\quad \\&\frac{\partial L}{\partial F_{21}}=\frac{\partial L}{\partial O_{11}} * X_{21}+\frac{\partial L}{\partial O_{12}} * X_{22}+\frac{\partial L}{\partial O_{21}} * X_{31}+\frac{\partial L}{\partial O_{22}} * X_{32} \\\quad \\&\frac{\partial L}{\partial F_{22}}=\frac{\partial L}{\partial O_{11}} * X_{22}+\frac{\partial L}{\partial O_{12}} * X_{23}+\frac{\partial L}{\partial O_{21}} * X_{32}+\frac{\partial L}{\partial O_{22}} * X_{33}\end{aligned}
 $$
 
-### Finding $\partial L/\partial X$
+### Finding $$\partial L/\partial X$$
 
-*Step 1: Finding the local gradient $(\partial O/\partial X)$*
+*Step 1: Finding the local gradient $$(\partial O/\partial X)$$*
 
-Similar to how we found the local gradients earlier, we can find $\partial O/\partial X$ as
+Similar to how we found the local gradients earlier, we can find $$\partial O/\partial X$$ as
 
 $$
 O_{11}=X_{11}F_{11}+X_{12}F_{12}+X_{21}F_{21}+X_{22}F_{22}
@@ -184,7 +183,7 @@ $$
 \frac{\partial O_{11}}{\partial {X}_{11}}={F}_{11,} \quad \frac{\partial O_{11}}{\partial {X}_{12}}={F}_{12}, \quad \frac{\partial O_{11}}{\partial {X}_{21}}={F}_{21}, \quad \frac{\partial O_{11}}{\partial {X}_{22}}={F}_{22}
 $$
 
-We can find local gradients for $O_{12}, O_{21},$  and $O_{22}$ similarly.
+We can find local gradients for $$O_{12}, O_{21},$$  and $$O_{22}$$ similarly.
 
 *Step 2: Using the chain rule*
 
@@ -203,4 +202,4 @@ $$
 
 - S. Albawi, T. A. Mohammed and S. Al-Zawi, "Understanding of a convolutional neural network," 2017 International Conference on Engineering and Technology (ICET), 2017, pp. 1-6, doi: 10.1109/ICEngTechnol.2017.8308186.
 - K. O’Shea en R. Nash, “An Introduction to Convolutional Neural Networks”, *arXiv*, Nov 2015. Available: [https://arxiv.org/abs/1511.08458](https://arxiv.org/abs/1511.08458)
-- “Introduction to Neural Network| Convolutional Neural Network,” Analytics Vidhya, 11-Feb-2020. [Online]. Available: [https://www.analyticsvidhya.com/blog/2020/02/mathematics-behind-convolutional-neural-network/](https://www.analyticsvidhya.com/blog/2020/02/mathematics-behind-convolutional-neural-network/)
+- “Introduction to Neural Network: Convolutional Neural Network,” Analytics Vidhya, 11-Feb-2020. [Online]. Available: [https://www.analyticsvidhya.com/blog/2020/02/mathematics-behind-convolutional-neural-network/](https://www.analyticsvidhya.com/blog/2020/02/mathematics-behind-convolutional-neural-network/)
